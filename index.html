@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="style.css">
+		<title>Dialy Expedichter</title>
+</head>
+<body>
+	<h1 class="center heading">Hishob</h1>
+	<h5 class="center wellcome" onclick="name()">Well-Come</h5>
+	<div>
+		<div class="center">
+			<form name="input" onsubmit="control(); note(input)">
+				<select class="margin size" name="select">
+					<option class="bground">Income</option>
+					<option class="bground">Expedichter</option>
+				</select>:
+				<input class="center size" type="number" placeholder="input amount" name="money" required>
+				<p>Note : <input class="center size" type="text" placeholder="Note" name="note" required></p>
+			</form>
+			<button class="center size" type="submit" onclick='control(); note()'>Done</button>
+		</div>
+		<div class="flex margin">
+			<div>
+				<table>
+					<tr>
+						<th>Sr.no</th>
+						<th>Date</th>
+						<th>Note</th>
+						<th>Information</th>
+						<th>Amount</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td class="font40"><p id="date1"></p></td>
+						<td><p id="note1"></p></td>
+						<td><p id=information1></p></td>
+						<td><p id="amount1"></p></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="font40"><p id="date2"></p></td>
+						<td><p id="note2"></p></td>
+						<td><p id=information2></p></td>
+						<td><p id="amount2"></p></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="font40"><p id="date3"></p></td>
+						<td><p id="note3"></p></td>
+						<td><p id=information3></p></td>
+						<td><p id="amount3"></p></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="font40"><p id="date4"></p></td>
+						<td><p id="note4"></p></td>
+						<td><p id=information4></p></td>
+						<td><p id="amount4"></p></td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="font40"><p id="date5"></p></td>
+						<td><p id="note5"></p></td>
+						<td><p id=information5></p></td>
+						<td><p id="amount5"></p></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div>
+			<p>Balance:<b id="balance"></b></p>
+			<p>Total income:<b id="income"></b><p>
+			<p>Total Expedichter:<b id="Expedichter"></b></p>
+		</div>
+	</div>	
+    <script src="script.js"></script>
+	<h5 class="center">Design and Develop By: Kiran Agalwe</h5>
+	<img class="logo" src="logo.png">
+</body>
+</html>
