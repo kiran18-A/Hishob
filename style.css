@@ -47,3 +47,67 @@
 		background-color: cyan;
 	}
 }
+.form-options{
+	/* border:2px solid white; */
+		margin-top:250px;
+	height:500px;
+		margin-bottom:150px
+	}
+	
+	.income-exp{
+
+position:relative;
+		left:-200px;
+
+		background-color:#badfe8;
+		height:100px;
+		width:300px;
+		text-align:center;
+		font-size:4rem;
+		font-weight:700;
+		border-radius:30px;
+		
+	}
+
+	.inp-amount{
+
+		background-color:#badfe8;
+		height:100px;
+		width:600px;
+		text-align:center;
+		font-size:4rem;
+		font-weight:700;
+		border-radius:30px;
+		color:#000000;
+		position:relative;
+		left:200px;
+		
+	}
+
+	.note{
+	background-color:#badfe8;
+	
+		height:100px;
+		width:80%;
+		text-align:center;
+		font-size:4rem;
+		font-weight:700;
+		border-radius:30px;
+	
+
+	}
+
+
+	
+	.btn{
+	
+
+		
+		background-color:#badfe8;
+		height:100px;
+		width:300px;
+		text-align:center;
+		font-size:4rem;
+		font-weight:700;
+		border-radius:30px;
+	}
