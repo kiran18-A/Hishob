@@ -9,16 +9,16 @@
 	<h1 class="center heading">Hishob</h1>
 	<h5 class="center wellcome" onclick="name()">Well-Come</h5>
 	<div>
-		<div class="center">
+		<div class="center form-options">
 			<form name="input" onsubmit="control(); note(input)">
-				<select class="margin size" name="select">
+				<select class="margin size income-exp" name="select">
 					<option class="bground">Income</option>
 					<option class="bground">Expedichter</option>
 				</select>:
-				<input class="center size" type="number" placeholder="input amount" name="money" required>
-				<p>Note : <input class="center size" type="text" placeholder="Note" name="note" required></p>
+				<input class="center size inp-amount" type="number" placeholder="input amount" name="money" required>
+				<p>Note : <input class="center size note" type="text" placeholder="Note" name="note" required></p>
 			</form>
-			<button class="center size" type="submit" onclick='control(); note()'>Done</button>
+			<button class="center size btn" type="submit" onclick='control(); note()'>Done</button>
 		</div>
 		<div class="flex margin">
 			<div>
