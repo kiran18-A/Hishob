@@ -109,6 +109,8 @@ function control()
 			document.getElementById("Expedichter").innerHTML = localStorage.getItem("Expedichter");
 		}
 	}
+	document.getElementById("balance").innerHTML = localStorage.getItem("balance");
+	document.getElementById("Expedichter").innerHTML = localStorage.getItem("Expedichter");
 	function note()
 		{
 			const date= new Date();
@@ -217,6 +219,8 @@ function control()
 			var date3= localStorage.getItem("date3");
 			document.getElementById("date3").innerHTML = date3;
 			var note3= localStorage.getItem("note3"); 
+			localStorage.setItem("money3",money);
+			document.getElementById("amount3").innerHTML = money3;
 			document.getElementById("note3").innerHTML = note3;
 			var chosen3= localStorage.getItem("information3");
 			document.getElementById("information3").innerHTML = chosen3;
@@ -238,15 +242,9 @@ function control()
 			document.getElementById("information5").innerHTML = chosen5;
 			var money5=localStorage.getItem("money5");
 			document.getElementById("amount5").innerHTML = money5;
-
 		}
 	function name()
 	{
-		var name;
-		
-		if(name=="undefined")
-		{
-			name=prompt("enter your name");
-			document.write(name);
-		}
+		var name=prompt("enter your name");
+		document.getElementById("name").innerHTML =name;
 	}
