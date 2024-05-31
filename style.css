@@ -1,9 +1,9 @@
 @media screen and (min-width:0px) and (max-width:780px){
 	body
     {
-	    background-color:black;
+	    background-color:rgb(208, 158, 158);
 	    background-repeat: no-repeat;
-	    color: white;
+	    color: rgb(121, 120, 120);
         font-size: 30px;
     }
 	.center{
@@ -14,13 +14,14 @@
         font-weight: 60px;
         font-size: 30px;
     }
+	
 }
 @media screen and (min-width:781px) and (max-width:1024px){
 	body
     {
-	    background-color:black;
+	    background-color:rgb(208, 158, 158);
 	    background-repeat: no-repeat;
-	    color: white;
+	    color: rgb(121, 120, 120);
         font-size: 45px;
     }
 	.center{
@@ -31,13 +32,81 @@
         font-weight: 60px;
         font-size: 30px;
     }
+	.flex{
+		display: flex;
+	}
+	.head_logo{
+		height:250px
+	}
+	.wellcome{
+		margin-top: 20%;
+        font-size: 40px;
+    }
+	.bground select,option:hover{
+		background-color: cyan;
+	}
+	.form-options{
+		/* border:2px solid white; */
+			margin-top:0px;
+		height:auto;
+			margin-bottom:0px
+		}
+		
+		.income-exp{
+			position:relative;
+			background-color:#badfe8;
+			height:90px;
+			width:300px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+			
+		}
+	
+		.inp-amount{
+	
+			background-color:#badfe8;
+			height:90px;
+			width:500px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+			color:#000000;
+			position:relative;	
+		}
+		.note{
+		background-color:#badfe8;
+		
+			height:100px;
+			width:80%;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+		}
+		.btn{		
+			background-color:#badfe8;
+			height:100px;
+			width:300px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+		}
+		.logo{
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
 }
 @media screen and (min-width:1025px) and (max-width:3840px){
     body
     {
-	    background-color:black;
+	    background-color:rgb(208, 158, 158);
 	    background-repeat: no-repeat;
-	    color: white;
+	    color: rgb(121, 120, 120);
         font-size: 60px;
     }
     .size{
@@ -46,10 +115,15 @@
         font-size: 30px;
     }
     .heading{
-        font-size: 200px;
+        font-size: 100px;
+		margin-left: 100px;
     }
+	.head_logo{
+		height: 300px;
+	}
     .wellcome{
-        font-size: 70px;
+		margin-top: 25%;
+        font-size: 40px;
     }
     .center{
 		text-align: center;
@@ -80,66 +154,56 @@
 	.bground select,option:hover{
 		background-color: cyan;
 	}
+	.form-options{
+		/* border:2px solid white; */
+			margin-top:0px;
+		height:auto;
+			margin-bottom:0px
+		}
+		
+		.income-exp{
+			position:relative;
+			margin-right: auto;
+			margin-left: auto;
+			background-color:#badfe8;
+			height:90px;
+			width:500px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+			
+		}
+	
+		.inp-amount{
+	
+			background-color:#badfe8;
+			height:90px;
+			width:500px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+			color:#000000;
+			position:relative;	
+		}
+		.note{
+		background-color:#badfe8;
+		
+			height:100px;
+			width:80%;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+		}
+		.btn{		
+			background-color:#badfe8;
+			height:100px;
+			width:300px;
+			text-align:center;
+			font-size:4rem;
+			font-weight:700;
+			border-radius:30px;
+		}
 }
-.form-options{
-	/* border:2px solid white; */
-		margin-top:250px;
-	height:500px;
-		margin-bottom:150px
-	}
-	
-	.income-exp{
-		position:relative;
-		left:-200px;
-		background-color:#badfe8;
-		height:100px;
-		width:300px;
-		text-align:center;
-		font-size:4rem;
-		font-weight:700;
-		border-radius:30px;
-		
-	}
-
-	.inp-amount{
-
-		background-color:#badfe8;
-		height:100px;
-		width:600px;
-		text-align:center;
-		font-size:4rem;
-		font-weight:700;
-		border-radius:30px;
-		color:#000000;
-		position:relative;
-		left:200px;
-		
-	}
-
-	.note{
-	background-color:#badfe8;
-	
-		height:100px;
-		width:80%;
-		text-align:center;
-		font-size:4rem;
-		font-weight:700;
-		border-radius:30px;
-	
-
-	}
-
-
-	
-	.btn{
-	
-
-		
-		background-color:#badfe8;
-		height:100px;
-		width:300px;
-		text-align:center;
-		font-size:4rem;
-		font-weight:700;
-		border-radius:30px;
-	}
