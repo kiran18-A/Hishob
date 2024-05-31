@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,19 @@
 		<title>Dialy Expedichter</title>
 </head>
 <body>
-	<h1 class="center heading">Hishob</h1>
-	<h5 class="center wellcome" onclick="name()">Well-Come</h5>
+	<div class="flex">
+		<div>
+			<img class="head_logo" src="logo.png">
+		</div>
+		<div>
+			<h5 class="center wellcome">Well-Come <b id="name" onclick="name()">Gentalman</b> to</h5>
+		</div>
+		<div>
+			<h1 class="center heading">Hishob</h1>
+		</div>
+	</div>
 	<div>
-		<div class="center form-options">
+		<div class="center entry form-options">
 			<form name="input" onsubmit="control(); note(input)">
 				<select class="margin size income-exp" name="select">
 					<option class="bground">Income</option>
