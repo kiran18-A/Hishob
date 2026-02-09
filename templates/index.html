@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<title>Dialy Expedichter</title>
+</head>
+<body>
+	<div class="flex">
+		<div>
+			<img class="head_logo" src="{{ url_for('static', filename='images/logo.png') }}">
+		</div>
+		<div>
+			<h5 class="center wellcome">Well-Come <b id="name" onclick="name()">{{ name }}</b> to</h5>
+		</div>
+		<div>
+			<h1 class="center heading">Hishob</h1>
+		</div>
+	</div>
+	<div>
+		<div class="center entry form-options">
+			<form method="POST" action="/submit">
+
+    <select class="margin size income-exp" name="type" required>
+        <option value="">Select</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+    </select>
+
+    <input class="center size inp-amount"
+           type="number"
+           placeholder="Input amount"
+           name="money"
+           required>
+
+    <p>
+        Note :
+        <input class="center size note"
+               type="text"
+               placeholder="Note"
+               name="note"
+               required>
+    </p>
+
+    <button class="center size btn" type="submit">Done</button>
+
+</form>
+
+		</div>
+		<div class="flex margin">
+			<div>
+				<table>
+					<tr>
+						<th>Sr.no</th>
+						<th>Date</th>
+                        <th>Information</th>
+                        <th>Amount</th>
+						<th>Note</th>
+					</tr>
+					{% for row in data %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ row.Date }}</td>
+                            <td>{{ row.Type }}</td>
+                            <td>{{ row.Amount }}</td>
+                            <td>{{ row.Note }}</td>
+                        </tr>
+                    {% endfor %}
+				</table>
+			</div>
+		</div>
+		<div>
+			<p>Balance:<b id="balance"></b></p>
+			<p>Total income:<b id="income"></b><p>
+			<p>Total Expedichter:<b id="Expedichter"></b></p>
+		</div>
+	</div>
+    <script src="script.js"></script>
+	<h5 class="center">Design and Develop By: Kiran Agalwe</h5>
+	<img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+</body>
+</html>
