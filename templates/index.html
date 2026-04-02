@@ -17,6 +17,9 @@
 			<h1 class="center heading">Hishob</h1>
 		</div>
 	</div>
+    <div>
+			<p>Balance:<b id="balance">{{total_balance}}</b>        Total Expenditure:<b id="Expenditure">{{total_expenditure}}</b></p>
+    </div>
 	<div>
 		<div class="center entry form-options">
 			<form method="POST" action="/submit">
@@ -70,9 +73,7 @@
 			</div>
 		</div>
 		<div>
-			<p>Balance:<b id="balance"></b></p>
-			<p>Total income:<b id="income"></b><p>
-			<p>Total Expedichter:<b id="Expedichter"></b></p>
+            <p>Total income:<b id="income">{{total_income}}</b><p>
 		</div>
 	</div>
     <script src="script.js"></script>
