@@ -1,4 +1,4 @@
-# from  spark import total_income,total_expenditure,total_balance,today_income,today_expenditure
+from spark import total_income,total_expenditure,total_balance
 from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
@@ -14,11 +14,27 @@ app = Flask(__name__)
 def home():
     return render_template("login.html")
 
+@app.route("/check_login", methods=["POST"])
+def check_login():
+    username=request.form["username"]
+    password=request.form["pass"]
+    cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username,username,))
+    result = cursor.fetchone()
+    name=result[1]
+    if check_password_hash(result[-1], password):
+        if result[2]==username or result[3]==username:
+         return  redirect(f"login_done/{name}")
+    return redirect("/")
+
+@app.route("/login_done/<name>")
+def login_done(name):
+    return render_template("index.html",name=name,
+                                   total_income=total_income,total_expenditure=total_expenditure,
+                                   total_balance=total_balance)
+
 @app.route("/signup")
 def signup():
-    val=0
-    email_info=""
-    return render_template("signup.html",val=val,email_info=email_info)
+    return render_template("signup.html")
 
 @app.route("/signup_save",methods=["POST"])
 def signup_save():
@@ -27,14 +43,13 @@ def signup_save():
         name = request.form["name"]
         email = request.form["email"]
         username= request.form["username"]
-        cursor.execute("SELECT 1 FROM users WHERE Email=%s",(email,))
+        cursor.execute("SELECT 1 FROM users WHERE Email=%s or Username=%s",(email,username))
         result=cursor.fetchone()
         if result is None:
-
             cursor.execute("""CREATE TABLE IF NOT EXISTS users(id int AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(20) NOT NULL,
                 Email VARCHAR(50) NOT NULL,
-                Username VARCHAR(20) NOT NULL,
+                Type VARCHAR(20) NOT NULL,
                 Password VARCHAR(10000) NOT NULL
                 )""")
             conn.commit()
@@ -43,11 +58,9 @@ def signup_save():
             conn.commit()
             return redirect(url_for("home"))
         else:
-            email_info=f"{email} is used before"
-            return redirect(url_for("signup",email_info=email_info))
+            return redirect(url_for("signup"))
     else:
-        val=int(1)
-        return  redirect((url_for("signup",val=val)))
+        return  redirect(url_for("signup"))
 
 
 @app.route("/submit", methods=["POST"])

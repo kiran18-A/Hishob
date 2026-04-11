@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f2027;
+    background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.form-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    transform: rotateY(15deg);
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+}
+
+.form-box:hover {
+    transform: rotateY(0deg);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    color: #333;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #333;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #ff105f;
+    font-size: 12px;
+}
+
+.input-box input[type="submit"] {
+    background: #ff105f;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.input-box input[type="submit"]:hover {
+    background: #e50956;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.forgot-password:hover {
+    color: #ff105f;
+}
+    </style>
+</head>
+<body>
+    {% if val==1 %}
+        <script>alert("Password should be more than 8 letter")</script>
+    {% endif %}
+    <div class="container">
+        <div class="form-box">
+            <h2>SignUp</h2>
+            <form method="POST" action="/signup_save">
+                <div class="input-box">
+                    <input type="text" name="name" required>
+                    <label>Name</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" name="email" required>
+                    <label>Email <b>{{ email_info }}</b></label>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="username" required>
+                    <label>Set your username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="pass" required>
+                    <label>Set your password</label>
+                </div>
+                <div class="input-box">
+                    <input type="submit" value="signup">
+                </div>
+            </form>
+            <form action="/">
+                <div class="input-box">
+                    <input type="submit" value="login">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
