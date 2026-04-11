@@ -207,3 +207,78 @@
 			border-radius:30px;
 		}
 }
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Default already for laptop */
+
+/* 📱 Mobile (0px - 480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 25px 18px;
+    border-radius: 18px;
+    transform: none; /* remove 3D tilt for small screens */
+  }
+
+  .login-card h2 {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .input-box input {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .options {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+/* 📱 Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .login-card {
+    width: 90%;
+    padding: 30px 24px;
+    transform: rotateX(6deg) rotateY(-6deg); /* less tilt */
+  }
+
+  .login-card h2 {
+    font-size: 28px;
+  }
+
+  .input-box input {
+    font-size: 15px;
+  }
+}
+
+/* 💻 Small Laptop (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login-card {
+    width: 400px;
+  }
+}
+
+/* 🖥️ Large Screens (1025px+) */
+@media (min-width: 1025px) {
+  .login-card {
+    width: 420px;
+  }
+}
