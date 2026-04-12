@@ -1,83 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-		<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-		<title>Dialy Expedichter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Expenditure - Hishob</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-	<div class="flex">
-		<div>
-			<img class="head_logo" src="{{ url_for('static', filename='images/logo.png') }}">
-		</div>
-		<div>
-			<h5 class="center wellcome">Well-Come <b id="name" onclick="name()">{{ name }}</b> to</h5>
-		</div>
-		<div>
-			<h1 class="center heading">Hishob</h1>
-		</div>
-	</div>
-    <div>
-			<p>Balance:<b id="balance">{{total_balance}}</b>        Total Expenditure:<b id="Expenditure">{{total_expenditure}}</b></p>
+
+    <div class="page">
+        <div class="dashboard-shell">
+
+            <header class="topbar">
+                <div class="brand-side">
+                    <div class="brand">
+                        <div class="logo-box">
+                            <img class="head_logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Hishob Logo">
+                        </div>
+
+                        <div class="brand-text">
+                            <p class="welcome">Welcome back, <span id="name">{{ name }}</span></p>
+                            <h1 class="heading">Hishob</h1>
+                            <p class="subheading">Track daily income, expenditure, and balance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-side">
+                    <div class="top-badge">Smart Money Tracker</div>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card balance-card">
+                    <p class="stat-label">Total Balance</p>
+                    <h2 class="stat-value">₹ {{ total_balance or 0 }}</h2>
+                    <p class="stat-note">Current available balance</p>
+                </div>
+
+                <div class="stat-card expense-card">
+                    <p class="stat-label">Today's Expenditure</p>
+                    <h2 class="stat-value">₹ {{ total_expenditure or 0 }}</h2>
+                    <p class="stat-note">Money spent today</p>
+                </div>
+
+                <div class="stat-card income-card">
+                    <p class="stat-label">Total Income</p>
+                    <h2 class="stat-value">₹ {{ total_income or 0 }}</h2>
+                    <p class="stat-note">Income recorded so far</p>
+                </div>
+            </section>
+
+            <section class="main-grid">
+                <div class="panel form-panel">
+                    <div class="panel-head">
+                        <h3>Add New Entry</h3>
+                        <p>Record your income or expense</p>
+                    </div>
+
+                    <form method="POST" action="/entry/{{ name }}" class="entry-form">
+                        <div class="field-group">
+                            <label for="type">Type</label>
+                            <select id="type" class="field" name="type" required>
+                                <option value="">Select Type</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="money">Amount</label>
+                            <input id="money" class="field" type="number" placeholder="Enter amount" name="money" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="note">Note</label>
+                            <input id="note" class="field" type="text" placeholder="Write a note" name="note" required>
+                        </div>
+
+                        <button class="btn" type="submit">Save Entry</button>
+                    </form>
+                </div>
+
+                <div class="panel chart-panel">
+                    <div class="panel-head">
+                        <h3>Income / Expenditure Summary</h3>
+                        <p>Visual overview of balance, expenditure, and income</p>
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p>Designed &amp; Developed by: <span>Kiran Aglawe</span></p>
+            </footer>
+
+        </div>
     </div>
-	<div>
-		<div class="center entry form-options">
-			<form method="POST" action="/entry/{{name}}">
 
-    <select class="margin size income-exp" name="type" required>
-        <option value="">Select</option>
-        <option value="Income">Income</option>
-        <option value="Expense">Expense</option>
-    </select>
+    <script>
+        const labels = ["Balance", "Expenditure", "Income"];
 
-    <input class="center size inp-amount"
-           type="number"
-           placeholder="Input amount"
-           name="money"
-           required>
+        const values = [
+            {{ total_balance or 0 }},
+            {{ total_expenditure or 0 }},
+            {{ total_income or 0 }}
+        ];
 
-    <p>
-        Note :
-        <input class="center size note"
-               type="text"
-               placeholder="Note"
-               name="note"
-               required>
-    </p>
+        const ctx = document.getElementById('myChart').getContext('2d');
 
-    <button class="center size btn" type="submit">Done</button>
+        const gradientBalance = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientBalance.addColorStop(0, "rgba(34, 197, 94, 0.95)");
+        gradientBalance.addColorStop(1, "rgba(21, 128, 61, 0.85)");
 
-</form>
+        const gradientExpense = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientExpense.addColorStop(0, "rgba(239, 68, 68, 0.95)");
+        gradientExpense.addColorStop(1, "rgba(185, 28, 28, 0.85)");
 
-		</div>
-		<div class="flex margin">
-			<div>
-				<table>
-					<tr>
-						<th>Sr.no</th>
-						<th>Date</th>
-                        <th>Information</th>
-                        <th>Amount</th>
-						<th>Note</th>
-					</tr>
-					{% for row in data %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ row.Date }}</td>
-                            <td>{{ row.Type }}</td>
-                            <td>{{ row.Amount }}</td>
-                            <td>{{ row.Note }}</td>
-                        </tr>
-                    {% endfor %}
-				</table>
-			</div>
-		</div>
-		<div>
-            <p>Total income:<b id="income">{{total_income}}</b><p>
-		</div>
-	</div>
-    <script src="script.js"></script>
-	<h5 class="center">Design and Develop By: Kiran Agalwe</h5>
-	<img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+        const gradientIncome = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientIncome.addColorStop(0, "rgba(59, 130, 246, 0.95)");
+        gradientIncome.addColorStop(1, "rgba(29, 78, 216, 0.85)");
+
+        const bar3dPlugin = {
+            id: 'bar3dPlugin',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+
+                chart.getDatasetMeta(0).data.forEach((bar) => {
+                    const x = bar.x;
+                    const y = bar.y;
+                    const base = bar.base;
+                    const width = bar.width;
+
+                    const left = x - width / 2;
+                    const right = x + width / 2;
+
+                    const dx = 12;
+                    const dy = 9;
+
+                    ctx.save();
+
+                    ctx.beginPath();
+                    ctx.moveTo(right, y);
+                    ctx.lineTo(right + dx, y - dy);
+                    ctx.lineTo(right + dx, base - dy);
+                    ctx.lineTo(right, base);
+                    ctx.closePath();
+                    ctx.fillStyle = "rgba(15, 23, 42, 0.35)";
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.moveTo(left, y);
+                    ctx.lineTo(right, y);
+                    ctx.lineTo(right + dx, y - dy);
+                    ctx.lineTo(left + dx, y - dy);
+                    ctx.closePath();
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.14)";
+                    ctx.fill();
+
+                    ctx.restore();
+                });
+            }
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Hishob Summary',
+                    data: values,
+                    backgroundColor: [gradientBalance, gradientExpense, gradientIncome],
+                    borderColor: [
+                        "rgba(255,255,255,0.22)",
+                        "rgba(255,255,255,0.22)",
+                        "rgba(255,255,255,0.22)"
+                    ],
+                    borderWidth: 1.2,
+                    borderRadius: 12,
+                    borderSkipped: false,
+                    barThickness: 48
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 1400,
+                    easing: 'easeOutQuart'
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "#dbeafe",
+                            font: {
+                                size: 13,
+                                weight: "600"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: "rgba(15, 23, 42, 0.95)",
+                        titleColor: "#ffffff",
+                        bodyColor: "#e2e8f0",
+                        borderColor: "rgba(255,255,255,0.08)",
+                        borderWidth: 1,
+                        padding: 12
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#cbd5e1",
+                            font: {
+                                size: 12,
+                                weight: "600"
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#cbd5e1",
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: "rgba(255,255,255,0.08)"
+                        }
+                    }
+                }
+            },
+            plugins: [bar3dPlugin]
+        });
+    </script>
+
 </body>
 </html>
