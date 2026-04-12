@@ -1,12 +1,12 @@
-from spark import total_income,total_expenditure,total_balance
 from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
-from database import conn
+from database import conn,calculations,enter_new_entry
 
 import os
 import csv
 
+today_date=date.today()
 cursor=conn.cursor()
 app = Flask(__name__)
 
@@ -28,9 +28,18 @@ def check_login():
 
 @app.route("/login_done/<name>")
 def login_done(name):
+    total_income,total_expenditure,total_balance=calculations(name)
     return render_template("index.html",name=name,
                                    total_income=total_income,total_expenditure=total_expenditure,
                                    total_balance=total_balance)
+
+@app.route("/entry/<name>",methods=["POST"])
+def entry(name):
+    amount=request.form["money"]
+    types = request.form["type"]
+    note = request.form["note"]
+    enter_new_entry(today_date,amount,types,note,name)
+    return redirect(url_for(f"login_done",name=name))
 
 @app.route("/signup")
 def signup():
