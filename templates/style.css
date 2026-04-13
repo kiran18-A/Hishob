@@ -14,6 +14,47 @@
         font-weight: 60px;
         font-size: 30px;
     }
+    .red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 	
 }
 @media screen and (min-width:781px) and (max-width:1024px){
@@ -100,6 +141,47 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
+		.red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 }
 @media screen and (min-width:1025px) and (max-width:3840px){
     body
@@ -250,6 +332,47 @@
     gap: 8px;
     align-items: flex-start;
   }
+  .red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 }
 
 /* 📱 Tablet (481px - 768px) */
@@ -267,6 +390,48 @@
   .input-box input {
     font-size: 15px;
   }
+
+  .red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 }
 
 /* 💻 Small Laptop (769px - 1024px) */
@@ -274,6 +439,47 @@
   .login-card {
     width: 400px;
   }
+  .red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 }
 
 /* 🖥️ Large Screens (1025px+) */
@@ -281,4 +487,45 @@
   .login-card {
     width: 420px;
   }
+  .red-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .red-btn:hover {
+        background: linear-gradient(135deg, #c82333, #a71d2a);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+    }
+
+    .red-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Shine Effect */
+    .red-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .red-btn:hover::before {
+        left: 125%;
+    }
 }

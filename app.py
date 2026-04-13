@@ -30,10 +30,10 @@ def check_login():
 
 @app.route("/login_done/<name>")
 def login_done(name):
-    total_income,total_expenditure,total_balance=calculations(name)
+    total_income,total_expenditure,total_balance,data=calculations(name)
     return render_template("index.html",name=name,
                                    total_income=total_income,total_expenditure=total_expenditure,
-                                   total_balance=total_balance)
+                                   total_balance=total_balance,data=data,today_date=today_date)
 
 @app.route("/entry/<name>",methods=["POST"])
 def entry(name):

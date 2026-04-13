@@ -1,17 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Expenditure - Hishob</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .red-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: #fff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.red-btn:hover {
+    background: linear-gradient(135deg, #c82333, #a71d2a);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
+
+.red-btn:active {
+    transform: scale(0.95);
+}
+
+/* Shine Effect */
+.red-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+.red-btn:hover::before {
+    left: 125%;
+}
+        .yellow-btn {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #333;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.yellow-btn:hover {
+    background: linear-gradient(135deg, #ffb300, #fb8c00);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+}
+
+.yellow-btn:active {
+    transform: scale(0.95);
+}
+
+/* Shine Effect */
+.yellow-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255,255,255,0.3);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+.yellow-btn:hover::before {
+    left: 125%;
+}
+    </style>
 </head>
 <body>
 
     <div class="page">
         <div class="dashboard-shell">
-
             <header class="topbar">
                 <div class="brand-side">
                     <div class="brand">
@@ -99,6 +182,35 @@
                     </div>
                 </div>
             </section>
+            <div>
+                <p></p>
+            </div>
+                <div class="panel form-panel">
+                    <table>
+                        <tr>
+                            <th>Sr_number</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Note</th>
+                        </tr>
+                        {% for i in data %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{i[1]}}</td>
+                            <td>{{i[2]}}</td>
+                            <td>{{i[3]}}</td>
+                            <td>{{i[4]}}</td>
+                            <td><form><button class="yellow-btn">Edit</button></form></td>
+                            <td><form><button class="red-btn">Delete</button></form></td>
+                            {% if today_data==i[1] %}
+                            <td><form><button>Change Type</button></form></td>
+                            <td><form><button>Delete</button></form></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
 
             <footer class="footer">
                 <p>Designed &amp; Developed by: <span>Kiran Aglawe</span></p>
