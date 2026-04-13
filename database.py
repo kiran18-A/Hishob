@@ -42,3 +42,8 @@ def calculations(user):
     total_expenditure=total_expenditure[0] or 0
     total_balance = int(total_income)-int(total_expenditure)
     return total_income,total_expenditure,total_balance
+
+# def all_data(name):
+#     cursor.execute("SELECT * FROM daily_money_flow WHERE User=%s",(name,))
+#     data=cursor.fetchall()
+#     return data
