@@ -2,7 +2,9 @@ from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
+# from spark import pdf_data
 
+import threading
 import os
 import csv
 
@@ -65,7 +67,7 @@ def signup_save():
             cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES(%s,%s,%s,%s)",
                        (name,email,username,password))
             conn.commit()
-            return redirect(url_for("home"))
+            return redirect(url_for("/"))
         else:
             return redirect(url_for("signup"))
     else:
