@@ -4,7 +4,7 @@ from datetime import date
 from database import conn,calculations,enter_new_entry
 # from spark import pdf_data
 
-import threading
+# import threading
 import os
 import csv
 
@@ -25,7 +25,7 @@ def check_login():
     name=result[1]
     if check_password_hash(result[-1], password):
         if result[2]==username or result[3]==username:
-         return  redirect(f"login_done/{name}")
+         return  redirect(url_for(f"login_done",name=name))
     return redirect("/")
 
 @app.route("/login_done/<name>")
