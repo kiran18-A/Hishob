@@ -1,4 +1,3 @@
-import os
 import mysql.connector
 from dotenv import load_dotenv
 from urllib.parse import urlparse
