@@ -5,8 +5,13 @@ from urllib.parse import urlparse
 import os
 
 load_dotenv()
-url=os.getenv("url")
+url=os.getenv("MYSQL_URL")
+if isinstance(url, bytes):
+    url = url.decode()
 parsed=urlparse(url)
+path = parsed.path
+if isinstance(path, bytes):
+    path = path.decode()
 conn=mysql.connector.connect(
     host=parsed.hostname,
     port=parsed.port,
