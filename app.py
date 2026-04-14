@@ -67,7 +67,7 @@ def signup_save():
             cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES(%s,%s,%s,%s)",
                        (name,email,username,password))
             conn.commit()
-            return redirect(url_for("/"))
+            return redirect(url_for("home"))
         else:
             return redirect(url_for("signup"))
     else:

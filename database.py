@@ -41,7 +41,7 @@ def calculations(user):
     total_expenditure=cursor.fetchone()
     total_expenditure=total_expenditure[0] or 0
     total_balance = int(total_income)-int(total_expenditure)
-    cursor.execute("select * from daily_money_flow order by id desc")
+    cursor.execute("select * from daily_money_flow where User=%s order by id desc",(user,))
     data=cursor.fetchmany(10)
     return total_income,total_expenditure,total_balance,data
 

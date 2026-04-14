@@ -183,8 +183,12 @@
                 </div>
             </section>
             <div>
-                <p></p>
+                <pre>
+
+
+                </pre>
             </div>
+            <section class="main-grid">
                 <div class="panel form-panel">
                     <table>
                         <tr>
@@ -201,16 +205,17 @@
                             <td>{{i[2]}}</td>
                             <td>{{i[3]}}</td>
                             <td>{{i[4]}}</td>
-                            <td><form><button class="yellow-btn">Edit</button></form></td>
-                            <td><form><button class="red-btn">Delete</button></form></td>
-                            {% if today_data==i[1] %}
-                            <td><form><button>Change Type</button></form></td>
-                            <td><form><button>Delete</button></form></td>
-                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>
+                    <center>
+                        <form><button class="yellow-btn">Edit</button></form>
+                        <form><button class="red-btn">Delete</button></form>
+                    </center>
                 </div>
+                <div  class="panel form-panel">
+                </div>
+            </section>
 
             <footer class="footer">
                 <p>Designed &amp; Developed by: <span>Kiran Aglawe</span></p>
