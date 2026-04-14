@@ -17,7 +17,7 @@ conn=mysql.connector.connect(
     port=parsed.port,
     user=parsed.username,
     password=parsed.password,
-    database=parsed.path.lstrip("/")
+    database=parsed.path.lstrip("/") if isinstance(parsed.path, str) else parsed.path.decode().lstrip("/")
 )
 
 cursor=conn.cursor()
