@@ -112,8 +112,8 @@
 
                 <div class="nav-side" style="display:flex">
                     <div>
-                        <form method="post" action="pdf/{{name}}">
-                            <button class="top-badge">Full Pdf</button>
+                        <form action="/">
+                            <button class="top-badge">Back</button>
                         </form>
                     </div>
                     <div class="top-badge">Smart Money Tracker</div>
@@ -164,7 +164,7 @@
 
                         <div class="field-group">
                             <label for="note">Note</label>
-                            <input id="note" class="field" type="text" placeholder="Write a note" name="note" required>
+                            <input id="note" class="field" type="text" placeholder="Write a note" name="note">
                         </div>
 
                         <button class="btn" type="submit">Save Entry</button>
@@ -189,6 +189,8 @@
                 </pre>
             </div>
             <section class="main-grid">
+                <div  class="panel form-panel">
+                </div>
                 <div class="panel form-panel">
                     <table>
                         <tr>
@@ -208,12 +210,10 @@
                         </tr>
                         {% endfor %}
                     </table>
-                    <center>
-                        <form><button class="yellow-btn">Edit</button></form>
-                        <form><button class="red-btn">Delete</button></form>
-                    </center>
-                </div>
-                <div  class="panel form-panel">
+<!--                    <center>-->
+<!--                        <form><button class="yellow-btn">Edit</button></form>-->
+<!--                        <form><button class="red-btn">Delete</button></form>-->
+<!--                    </center>-->
                 </div>
             </section>
 

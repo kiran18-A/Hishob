@@ -2,9 +2,9 @@ from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
-# from spark import pdf_data
+from spark import spark_calculations
 
-# import threading
+import threading
 import os
 import csv
 
@@ -22,7 +22,11 @@ def check_login():
     password=request.form["pass"]
     cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username,username,))
     result = cursor.fetchone()
+    print(username)
+    print(result)
     name=result[1]
+    if result==None:
+        return redirect(url_for("home"))
     if check_password_hash(result[-1], password):
         if result[2]==username or result[3]==username:
          return  redirect(url_for(f"login_done",name=name))
@@ -30,6 +34,7 @@ def check_login():
 
 @app.route("/login_done/<name>")
 def login_done(name):
+    spark_calculations(name)
     total_income,total_expenditure,total_balance,data=calculations(name)
     return render_template("index.html",name=name,
                                    total_income=total_income,total_expenditure=total_expenditure,
@@ -89,6 +94,10 @@ def submit():
             writer.writerow(["Date","Amount", "Type", "Note"])
         writer.writerow([today,int(money),entry_type,note])
     return redirect(url_for("home"))
+
+@app.route("/demo")
+def demo():
+    return redirect(url_for("login_done",name='Demo'))
 
 if __name__ == "__main__":
     app.run(debug=False)

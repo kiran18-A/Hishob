@@ -44,8 +44,3 @@ def calculations(user):
     cursor.execute("select * from daily_money_flow where User=%s order by id desc",(user,))
     data=cursor.fetchmany(10)
     return total_income,total_expenditure,total_balance,data
-
-# def all_data(name):
-#     cursor.execute("SELECT * FROM daily_money_flow WHERE User=%s",(name,))
-#     data=cursor.fetchall()
-#     return data
