@@ -28,6 +28,8 @@ def create_table():
     conn.commit()
     return True
 
+create_table()
+
 def enter_new_entry(today_date,amount,types,note,user):
     create_table()
     cursor.execute("INSERT INTO daily_money_flow (Date_of_flow,Amount,Type,Note,User) VALUES (%s,%s,%s,%s,%s)",
