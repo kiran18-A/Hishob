@@ -3,7 +3,6 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
 # from spark import spark_calculations
-
 # import threading
 import os
 import csv
@@ -77,23 +76,6 @@ def signup_save():
             return redirect(url_for("signup"))
     else:
         return  redirect(url_for("signup"))
-
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    today = date.today()
-    entry_type = request.form["type"]
-    money = request.form["money"]
-    note = request.form["note"]
-    file_exists = os.path.isfile("data/data.csv")
-
-    with open("data/data.csv", mode="a", newline="") as file:
-        writer = csv.writer(file)
-        # write header only once
-        if not file_exists:
-            writer.writerow(["Date","Amount", "Type", "Note"])
-        writer.writerow([today,int(money),entry_type,note])
-    return redirect(url_for("home"))
 
 @app.route("/demo")
 def demo():
