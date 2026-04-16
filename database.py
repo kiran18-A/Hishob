@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 import os
 
 load_dotenv()
-url=os.getenv("MYSQL_URL")
+url=os.getenv("url")
 
 parsed=urlparse(url)
 conn=mysql.connector.connect(
