@@ -9,7 +9,7 @@ load_dotenv()
 from_mail=os.getenv('from_mail')
 password=os.getenv('password')
 
-def mail(mail):
+def mail(mail,name):
      subject="Welcome"
      body=(f"{name}\nYour account created successfully")
      msg=MIMEText(body)

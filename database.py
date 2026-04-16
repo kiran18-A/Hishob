@@ -4,7 +4,6 @@ from urllib.parse import urlparse
 import os
 
 load_dotenv()
-print(os.getenv("url"))
 url=os.getenv("url")
 
 parsed=urlparse(url)

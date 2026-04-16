@@ -56,7 +56,7 @@ def signup_save():
         name = request.form["name"]
         email = request.form["email"]
         username= request.form["username"]
-        threading.Thread(target=mail,args=email)
+        threading.Thread(target=mail,args=(email,name))
         cursor.execute("SELECT 1 FROM users WHERE Email=%s or Username=%s",(email,username))
         result=cursor.fetchone()
         if result is None:
