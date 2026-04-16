@@ -2,6 +2,9 @@ from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
+from mail import  mail
+
+import  threading
 
 today_date=date.today()
 cursor=conn.cursor()
@@ -10,7 +13,6 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("login.html")
-
 @app.route("/check_login", methods=["POST"])
 def check_login():
     username=request.form["username"]
@@ -54,6 +56,7 @@ def signup_save():
         name = request.form["name"]
         email = request.form["email"]
         username= request.form["username"]
+        threading.Thread(target=mail,args=email)
         cursor.execute("SELECT 1 FROM users WHERE Email=%s or Username=%s",(email,username))
         result=cursor.fetchone()
         if result is None:
