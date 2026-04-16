@@ -35,13 +35,24 @@ def enter_new_entry(today_date,amount,types,note,user):
     return True
 
 def calculations(user):
-    cursor.execute("SELECT sum(Amount) FROM daily_money_flow WHERE User=%s AND Type='Income'",(user,))
-    total_income=cursor.fetchone()
-    total_income=total_income[0] or 0
-    cursor.execute("SELECT sum(Amount) FROM daily_money_flow WHERE User=%s AND Type='Expense'", (user,))
-    total_expenditure=cursor.fetchone()
-    total_expenditure=total_expenditure[0] or 0
-    total_balance = int(total_income)-int(total_expenditure)
-    cursor.execute("select * from daily_money_flow where User=%s order by id desc",(user,))
-    data=cursor.fetchmany(10)
-    return total_income,total_expenditure,total_balance,data
+    cursor.execute(
+        "SELECT SUM(Amount) FROM daily_money_flow WHERE User=%s AND Type='Income'",
+        (user,)
+    )
+    total_income = cursor.fetchone()[0] or 0
+
+    cursor.execute(
+        "SELECT SUM(Amount) FROM daily_money_flow WHERE User=%s AND Type='Expense'",
+        (user,)
+    )
+    total_expenditure = cursor.fetchone()[0] or 0
+
+    total_balance = float(total_income) - float(total_expenditure)
+
+    cursor.execute(
+        "SELECT * FROM daily_money_flow WHERE User=%s ORDER BY id DESC",
+        (user,)
+    )
+    data = cursor.fetchmany(10)
+
+    return total_income, total_expenditure, total_balance, data

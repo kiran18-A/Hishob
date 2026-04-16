@@ -2,10 +2,6 @@ from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
-# from spark import spark_calculations
-# import threading
-import os
-import csv
 
 today_date=date.today()
 cursor=conn.cursor()
