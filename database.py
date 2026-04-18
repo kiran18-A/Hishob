@@ -17,6 +17,7 @@ conn=mysql.connector.connect(
     password=parsed.password,
     database=parsed.path.lstrip("/") if isinstance(parsed.path, str) else parsed.path.decode().lstrip("/")
 )
+print(conn)
 
 cursor=conn.cursor()
 def create_table():
