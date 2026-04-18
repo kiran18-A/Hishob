@@ -68,5 +68,3 @@ def mail_info():
         (today_date,))
     today_expense=cursor.fetchall()
     return result,today_income,today_expense
-
-mail_info()
