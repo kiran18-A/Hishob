@@ -2,13 +2,17 @@ from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
 from database import conn,calculations,enter_new_entry
-from mail import  mail
+from mail import  mail,send_mail
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import  threading
 
 today_date=date.today()
 cursor=conn.cursor()
 app = Flask(__name__)
+scheduler=BackgroundScheduler()
+scheduler.add_job(send_mail,trigger='cron',hour=23,minute=56,timezone="Asia/Kolkata")
+scheduler.start()
 
 @app.route("/")
 def home():
@@ -29,7 +33,6 @@ def check_login():
 
 @app.route("/login_done/<name>")
 def login_done(name):
-    # spark_calculations(name)
     total_income,total_expenditure,total_balance,data=calculations(name)
     return render_template("index.html",name=name,
                                    total_income=total_income,total_expenditure=total_expenditure,
@@ -66,7 +69,7 @@ def signup_save():
                 )""")
             conn.commit()
             cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES(%s,%s,%s,%s)",
-                       (name,email,username,password))
+                       (username,email,name,password))
             conn.commit()
             return redirect(url_for("home"))
         else:

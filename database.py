@@ -1,12 +1,15 @@
-import mysql.connector
 from dotenv import load_dotenv
 from urllib.parse import urlparse
+from datetime import date
+
 import os
+import mysql.connector
 
 load_dotenv()
 url=os.getenv("url")
-
+today_date=date.today()
 parsed=urlparse(url)
+
 conn=mysql.connector.connect(
     host=parsed.hostname,
     port=parsed.port,
@@ -49,10 +52,21 @@ def calculations(user):
 
     total_balance = float(total_income) - float(total_expenditure)
 
-    cursor.execute(
-        "SELECT * FROM daily_money_flow WHERE User=%s ORDER BY id DESC",
-        (user,)
-    )
+    cursor.execute("SELECT * FROM daily_money_flow WHERE User=%s ORDER BY id DESC",(user,))
     data = cursor.fetchmany(10)
-
     return total_income, total_expenditure, total_balance, data
+
+def mail_info():
+    cursor.execute(
+        "SELECT users.Name,users.Email,daily_money_flow.Type,SUM(Amount) FROM users INNER JOIN daily_money_flow ON users.Name=daily_money_flow.User GROUP BY User,Type,Email")
+    result = cursor.fetchall()
+    cursor.execute("Select User,sum(Amount) from daily_money_flow Where Type='Income' and Date_of_flow=%s group by User",
+                   (today_date,))
+    today_income=cursor.fetchall()
+    cursor.execute(
+        "Select User,sum(Amount) from daily_money_flow Where Type='Expense' and Date_of_flow=%s group by User",
+        (today_date,))
+    today_expense=cursor.fetchall()
+    return result,today_income,today_expense
+
+mail_info()
