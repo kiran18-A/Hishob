@@ -23,13 +23,15 @@ def check_login():
     password=request.form.get("pass")
     cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username,username))
     result = cursor.fetchone()
-    if not result:
+    if result is None:
         return redirect(url_for("home"))
     try:
         name = result[1]
         if check_password_hash(result[-1], password):
             if result[2]==username or result[3]==username:
                 return  redirect(url_for(f"login_done",name=name))
+            return redirect(url_for("home"))
+        return redirect(url_for("home"))
     except Exception as e:
         return redirect(url_for("home"))
 
