@@ -50,7 +50,7 @@ def calculations(user):
     )
     total_expenditure = cursor.fetchone()[0] or 0
 
-    total_balance = float(total_income) - float(total_expenditure)
+    total_balance = (float(total_income) - float(total_expenditure)) or 0
 
     cursor.execute("SELECT * FROM daily_money_flow WHERE User=%s ORDER BY id DESC",(user,))
     data = cursor.fetchmany(10)
