@@ -50,11 +50,14 @@ def final_mail():
         msg['Subject'] = subject
         msg['To'] = result[i][1]
         try:
-            server = smtplib.SMTP("smtp.gmail.com", 587)
-            server.starttls()
-            server.login(from_mail, password)
-            server.send_message(msg)
-            server.quit()
+            if result[i][1]=='demo@gmail.com':
+                pass
+            else:
+                server = smtplib.SMTP("smtp.gmail.com", 587)
+                server.starttls()
+                server.login(from_mail, password)
+                server.send_message(msg)
+                server.quit()
         except Exception as e:
             print(e)
         i+=2

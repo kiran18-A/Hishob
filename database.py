@@ -29,6 +29,7 @@ def create_table():
                     User VARCHAR(40)
                     )""")
     conn.commit()
+    cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES('Demo','demo@gmail.com','Demo','12345678')")
     return True
 
 def enter_new_entry(today_date,amount,types,note,user):
