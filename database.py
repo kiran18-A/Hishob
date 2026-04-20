@@ -19,6 +19,12 @@ conn=mysql.connector.connect(
 )
 
 cursor=conn.cursor()
+
+def get_conn(username):
+    cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username, username,))
+    result = cursor.fetchone()
+    return result
+
 def create_table():
     cursor.execute("""CREATE TABLE IF NOT EXISTS daily_money_flow(id int AUTO_INCREMENT PRIMARY KEY,
                     Date_of_flow DATE NOT NULL,

@@ -1,7 +1,7 @@
 from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
-from database import conn,calculations,enter_new_entry
+from database import conn,calculations,enter_new_entry,get_conn
 from mail import  mail,send_mail
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -17,12 +17,14 @@ scheduler.start()
 @app.route("/")
 def home():
     return render_template("login.html")
+
 @app.route("/check_login", methods=["POST"])
 def check_login():
     username=request.form.get("username")
     password=request.form.get("pass")
-    cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username,username))
-    result = cursor.fetchone()
+    result=get_conn(username)
+    if result is None:
+        return redirect(url_for("home"))
     try:
         name = result[1]
         if check_password_hash(result[-1], password):
@@ -37,8 +39,8 @@ def check_login():
 def login_done(name):
     total_income,total_expenditure,total_balance,data=calculations(name)
     return render_template("index.html",name=name,
-                                   total_income=total_income,total_expenditure=total_expenditure,
-                                   total_balance=total_balance,data=data,today_date=today_date)
+                                   total_income=total_income or 0,total_expenditure=total_expenditure or 0,
+                                   total_balance=total_balance or 0,data=data,today_date=today_date)
 
 @app.route("/entry/<name>",methods=["POST"])
 def entry(name):
