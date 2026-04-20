@@ -45,7 +45,7 @@ def final_mail():
             else:
                 user_t_expense=0
         subject="Report"
-        body=f"{result[i][0]}\nToday you have {balance} on {today_date}\nExpenditure is {user_t_expense} on {today_date}\nIncome is {user_t_income} on {today_date}\nTill now your income is {result[i][3]} and expenditure is {result[i+1][3]} \nfrom the Hishob"
+        body=f"{result[i][0]}\nToday you have {balance} on {today_date}\nExpenditure is {user_t_expense or 0} on {today_date}\nIncome is {user_t_income or 0} on {today_date}\nTill now your income is {result[i][3]} and expenditure is {result[i+1][3]} \nfrom the Hishob"
         msg = MIMEText(body)
         msg['Subject'] = subject
         msg['To'] = result[i][1]
