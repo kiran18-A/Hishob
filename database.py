@@ -10,22 +10,27 @@ url=os.getenv("url")
 today_date=date.today()
 parsed=urlparse(url)
 
-conn=mysql.connector.connect(
-    host=parsed.hostname,
-    port=parsed.port,
-    user=parsed.username,
-    password=parsed.password,
-    database=parsed.path.lstrip("/") if isinstance(parsed.path, str) else parsed.path.decode().lstrip("/")
-)
-
-cursor=conn.cursor()
+def get_connection():
+    return mysql.connector.connect(
+        host=parsed.hostname,
+        port=parsed.port,
+        user=parsed.username,
+        password=parsed.password,
+        database=parsed.path.lstrip("/") if isinstance(parsed.path, str) else parsed.path.decode().lstrip("/")
+    )
 
 def get_conn(username):
+    conn = get_connection()
+    cursor = conn.cursor()
     cursor.execute("SELECT * FROM users WHERE Email=%s OR Username=%s", (username, username,))
     result = cursor.fetchone()
+    conn.close()
+    cursor.close()
     return result
 
 def create_table():
+    conn=get_connection()
+    cursor = conn.cursor()
     cursor.execute("""CREATE TABLE IF NOT EXISTS daily_money_flow(id int AUTO_INCREMENT PRIMARY KEY,
                     Date_of_flow DATE NOT NULL,
                     Amount DOUBLE NOT NULL,
@@ -35,16 +40,23 @@ def create_table():
                     )""")
     conn.commit()
     cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES('Demo','demo@gmail.com','Demo','12345678')")
+    conn.close()
+    cursor.close()
     return True
 
 def enter_new_entry(today_date,amount,types,note,user):
+    conn = get_connection()
+    cursor = conn.cursor()
     create_table()
-    cursor.execute("INSERT INTO daily_money_flow (Date_of_flow,Amount,Type,Note,User) VALUES (%s,%s,%s,%s,%s)",
-                   (today_date,amount,types,note,user))
+    cursor.execute("INSERT INTO daily_money_flow (Date_of_flow,Amount,Type,Note,User) VALUES (%s,%s,%s,%s,%s)",(today_date,amount,types,note,user))
     conn.commit()
+    conn.close()
+    cursor.close()
     return True
 
 def calculations(user):
+    conn = get_connection()
+    cursor = conn.cursor()
     cursor.execute(
         "SELECT SUM(Amount) FROM daily_money_flow WHERE User=%s AND Type='Income'",
         (user,)
@@ -61,9 +73,13 @@ def calculations(user):
 
     cursor.execute("SELECT * FROM daily_money_flow WHERE User=%s ORDER BY id DESC",(user,))
     data = cursor.fetchmany(10)
+    conn.close()
+    cursor.close()
     return total_income, total_expenditure, total_balance, data
 
 def mail_info():
+    conn = get_connection()
+    cursor = conn.cursor()
     cursor.execute(
         "SELECT users.Name,users.Email,daily_money_flow.Type,SUM(Amount) FROM users INNER JOIN daily_money_flow ON users.Name=daily_money_flow.User GROUP BY User,Type,Email")
     result = cursor.fetchall()
@@ -74,4 +90,6 @@ def mail_info():
         "Select User,sum(Amount) from daily_money_flow Where Type='Expense' and Date_of_flow=%s group by User",
         (today_date,))
     today_expense=cursor.fetchall()
+    conn.close()
+    cursor.close()
     return result,today_income,today_expense

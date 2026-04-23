@@ -1,14 +1,13 @@
 from flask import Flask, render_template,redirect, request, url_for
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import date
-from database import conn,calculations,enter_new_entry,get_conn
+from database import get_connection,calculations,enter_new_entry,get_conn
 from mail import  mail,send_mail
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import  threading
 
 today_date=date.today()
-cursor=conn.cursor()
 app = Flask(__name__)
 scheduler=BackgroundScheduler()
 scheduler.add_job(send_mail,trigger='cron',hour=23,minute=56,timezone="Asia/Kolkata")
@@ -57,6 +56,8 @@ def signup():
 @app.route("/signup_save",methods=["POST"])
 def signup_save():
     if len(request.form["pass"])>=8:
+        conn = get_connection()
+        cursor = conn.cursor()
         password = generate_password_hash(request.form["pass"])
         name = request.form["name"]
         email = request.form["email"]
@@ -75,6 +76,8 @@ def signup_save():
             cursor.execute("INSERT INTO users(Name,Email,Username,Password) VALUES(%s,%s,%s,%s)",
                        (username,email,name,password))
             conn.commit()
+            conn.close()
+            cursor.close()
             return redirect(url_for("home"))
         else:
             return redirect(url_for("signup"))
@@ -86,4 +89,4 @@ def demo():
     return redirect(url_for("login_done",name='Demo'))
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
